@@ -1,0 +1,57 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "env": {
+    "jest": true,
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "rules": {
+    "class-methods-use-this": 1,
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "ignore"
+    }],
+    "curly": "error",
+    "object-curly-newline": "off",
+    "function-paren-newline": "off",
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["**/*.test.js", "**/*.story.js"]
+    }],
+    "import/no-named-as-default": "off",
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": [ "Link" ],
+      "aspects": [ "invalidHref", "preferButton" ]
+    }],
+    "jsx-a11y/label-has-for": [2, {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
+    "jsx-a11y/media-has-caption": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "max-len": ["error", 200],
+    "no-console": "error",
+    "no-multiple-empty-lines": ["error", {
+      "max": 1,
+      "maxEOF": 1
+    }],
+    "no-param-reassign": "off",
+    "react/jsx-filename-extension": ["error", {
+      "extensions": [".js"]
+    }],
+    "react/prefer-stateless-function": 1,
+    "react/destructuring-assignment": 1
+  }
+}
