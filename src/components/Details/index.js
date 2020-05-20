@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Circle } from 'styled-spinkit';
 
 const NotApplicable = 'N/A';
 const Container = styled.article`
   padding: 1em;
+  position: relative;
   @media (min-width: 1024px), { 
     flex-basis: 66.66%; 
     display: flex;
@@ -23,8 +25,25 @@ const Header = styled.h1`
 const Label = styled.span`
   font-weight: bold;
 `;
-const Details = ({ title, genre, plot, director, actors, language, duration, poster }) => (
+
+const Loading = styled.div`
+  background-color: #FEFEFE;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Details = ({ title, genre, plot, director, actors, language, duration, poster, loading }) => (
   <Container>
+    { loading && (
+    <Loading>
+      <Circle width={60} />
+    </Loading>
+    )}
     <Left>
       <Header>{title}</Header>
       <sub>
@@ -71,6 +90,7 @@ Details.propTypes = {
   language: PropTypes.string.isRequired,
   duration: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 Details.defaultProps = {

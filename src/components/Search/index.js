@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LeftArrow } from '@styled-icons/boxicons-solid/LeftArrow';
 import { RightArrow } from '@styled-icons/boxicons-solid/RightArrow';
+import { Circle } from 'styled-spinkit';
 import movieType from '../../types';
 
 import Card from '../Card';
@@ -52,9 +53,25 @@ const StyledButton = styled.button`
   background-color: #FFF;
 `;
 
+const SearchContainer = styled.div`
+  min-height: 100px;
+  position: relative;
+`;
+
+const Loading = styled.div`
+  background-color: #FEFEFE;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const MaxItemsPerPage = 10;
 
-const Search = ({ moviesResult, movieSelected, doSearch }) => {
+const Search = ({ moviesResult, movieSelected, doSearch, loading }) => {
   const [selectedId, setSelectedId] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [searchText, setSearchText] = useState();
@@ -62,8 +79,6 @@ const Search = ({ moviesResult, movieSelected, doSearch }) => {
   const { totalResults, Search: movies, Response, Error } = moviesResult;
 
   useEffect(() => {
-    // if (!searchText) return;
-    // doSearch(`&s=${searchText}&page=${pageNumber}`);
     doSearch(searchText, pageNumber);
   }, [searchText, pageNumber]);
 
@@ -89,8 +104,14 @@ const Search = ({ moviesResult, movieSelected, doSearch }) => {
   return (
     <Container>
       <SearchBox type="text" name="search" aria-label="Search" onChange={onSearchTextChanged} />
-      {(Response === 'False') && (<div>{Error}</div>)}
-      { movies && (
+      <SearchContainer>
+        { loading && (
+        <Loading>
+          <Circle width={60} />
+        </Loading>
+        )}
+        {(Response === 'False') && (<div>{Error}</div>)}
+        { movies && (
         <StyledUL>
           { movies.map((movie) => (
             <StyledLI key={`movie-${movie.imdbID}`}>
@@ -98,19 +119,22 @@ const Search = ({ moviesResult, movieSelected, doSearch }) => {
             </StyledLI>
           ))}
         </StyledUL>
-      )}
-      { (totalResults && totalResults > MaxItemsPerPage) && (
-      <Pagination>
-        <StyledButton onClick={previousPage}><LeftArrow width={20} /></StyledButton>
-        <TotalResult>
-          <div>
-            {`Page ${pageNumber}`}
-          </div>
-          <div>{`${totalResults} result`}</div>
-        </TotalResult>
-        <StyledButton onClick={nextPage}><RightArrow width={20} /></StyledButton>
-      </Pagination>
-      )}
+        )}
+        { (totalResults && totalResults > MaxItemsPerPage) && (
+        <Pagination>
+          { pageNumber > 1 && <StyledButton onClick={previousPage}><LeftArrow width={20} /></StyledButton>}
+          <TotalResult>
+            <div>
+              {`Page ${pageNumber}`}
+            </div>
+            <div>{`${totalResults} result`}</div>
+          </TotalResult>
+          {(pageNumber * MaxItemsPerPage <= totalResults) && <StyledButton onClick={nextPage}><RightArrow width={20} /></StyledButton>}
+
+        </Pagination>
+        )}
+
+      </SearchContainer>
 
     </Container>
   );
@@ -125,6 +149,7 @@ Search.propTypes = {
   }).isRequired,
   movieSelected: PropTypes.func.isRequired,
   doSearch: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default Search;
