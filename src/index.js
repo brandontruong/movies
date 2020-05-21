@@ -1,28 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router'; // react-router v4/v5
-import { ConnectedRouter } from 'connected-react-router';
-
-import configureStore, { history } from './store';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const store = configureStore(/* provide initial state if any */);
-
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <>
-          <Switch>
-            <Route exact path="/" render={() => (<App />)} />
-            <Route render={() => (<div>Under construction</div>)} />
-          </Switch>
-        </>
-      </ConnectedRouter>
-    </Provider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
