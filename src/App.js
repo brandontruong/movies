@@ -17,49 +17,48 @@ const Container = styled.div`
 `;
 
 const App = () => {
-  return <div>hello</div>
-  // const dispatch = useDispatch();
-  // const { moviesResult, movie } = useSelector((state) => state.dataSource || { moviesResult: {}, movie: {} });
-  // const [loadingMovies, setLoadingMovies] = useState(false);
+  const dispatch = useDispatch();
+  const { moviesResult, movie } = useSelector((state) => state.dataSource || { moviesResult: {}, movie: {} });
+  const [loadingMovies, setLoadingMovies] = useState(false);
 
-  // const [loadingMovieDetails, setLoadingMovieDetails] = useState(false);
-  // useEffect(() => {
-  //   setLoadingMovies(false);
-  // }, [moviesResult]);
+  const [loadingMovieDetails, setLoadingMovieDetails] = useState(false);
+  useEffect(() => {
+    setLoadingMovies(false);
+  }, [moviesResult]);
 
-  // useEffect(() => {
-  //   setLoadingMovieDetails(false);
-  // }, [movie]);
+  useEffect(() => {
+    setLoadingMovieDetails(false);
+  }, [movie]);
 
-  // const movieSelected = ({ imdbID }) => {
-  //   dispatch(DataSourceActions.fetchMovie(`&i=${imdbID}`));
-  //   setLoadingMovieDetails(true);
-  // };
+  const movieSelected = ({ imdbID }) => {
+    dispatch(DataSourceActions.fetchMovie(`&i=${imdbID}`));
+    setLoadingMovieDetails(true);
+  };
 
-  // const realSearch = (searchText, pageNumber) => {
-  //   if (!searchText) return;
-  //   dispatch(DataSourceActions.fetchMovies(`&s=${searchText}&page=${pageNumber}`));
-  //   setLoadingMovies(true);
-  // };
+  const realSearch = (searchText, pageNumber) => {
+    if (!searchText) return;
+    dispatch(DataSourceActions.fetchMovies(`&s=${searchText}&page=${pageNumber}`));
+    setLoadingMovies(true);
+  };
 
-  // const doSearch = debounce(realSearch, 500);
-  // const { Title, Genre, Plot, Language, Director, Actors, Runtime, Poster } = movie;
-  // return (
-  //   <Container>
-  //     <Search moviesResult={moviesResult} movieSelected={movieSelected} doSearch={doSearch} loading={loadingMovies} />
-  //     <Details
-  //       title={Title}
-  //       genre={Genre}
-  //       plot={Plot}
-  //       language={Language}
-  //       director={Director}
-  //       Actors={Actors}
-  //       duration={Runtime}
-  //       poster={Poster}
-  //       loading={loadingMovieDetails}
-  //     />
-  //   </Container>
-  // );
+  const doSearch = debounce(realSearch, 500);
+  const { Title, Genre, Plot, Language, Director, Actors, Runtime, Poster } = movie;
+  return (
+    <Container>
+      <Search moviesResult={moviesResult} movieSelected={movieSelected} doSearch={doSearch} loading={loadingMovies} />
+      <Details
+        title={Title}
+        genre={Genre}
+        plot={Plot}
+        language={Language}
+        director={Director}
+        Actors={Actors}
+        duration={Runtime}
+        poster={Poster}
+        loading={loadingMovieDetails}
+      />
+    </Container>
+  );
 };
 
 export default App;
