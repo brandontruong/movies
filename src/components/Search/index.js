@@ -73,14 +73,18 @@ const MaxItemsPerPage = 10;
 
 const Search = ({ moviesResult, movieSelected, doSearch, loading }) => {
   const [selectedId, setSelectedId] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState();
   const [searchText, setSearchText] = useState();
 
   const { totalResults, Search: movies, Response, Error } = moviesResult;
 
   useEffect(() => {
     doSearch(searchText, pageNumber);
-  }, [searchText, pageNumber]);
+  }, [pageNumber, searchText]);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [searchText]);
 
   const onCardClicked = (imdbID) => () => {
     setSelectedId(imdbID);
