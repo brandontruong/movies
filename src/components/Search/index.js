@@ -107,7 +107,7 @@ const Search = ({ moviesResult, movieSelected, doSearch, loading }) => {
 
   return (
     <Container>
-      <SearchBox type="text" name="search" aria-label="Search" onChange={onSearchTextChanged} />
+      <SearchBox type="text" name="search" aria-label="Search" onChange={onSearchTextChanged} placeholder="Search movies" />
       <SearchContainer>
         { loading && (
         <Loading>
