@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const App = () => {
   const dispatch = useDispatch();
-  const { moviesResult, movie } = useSelector((state) => state.dataSource || { moviesResult: {}, movie: {} });
+  const { moviesResult, movie } = useSelector((state) => state.dataSource);
   const [loadingMovies, setLoadingMovies] = useState(false);
 
   const [loadingMovieDetails, setLoadingMovieDetails] = useState(false);

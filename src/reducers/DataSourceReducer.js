@@ -2,8 +2,8 @@ import { createReducer } from 'reduxsauce';
 import Types from '../actions/Types';
 
 export const INITIAL_STATE = {
-  movie: {},
-  moviesResult: [],
+  movie: { Title: '', Genre: '', Plot: '', Language: '', Director: '', Actors: '', Runtime: '', Poster: '' },
+  moviesResult: {},
 };
 
 export const fetchMoviesSuccessful = (state, action) => ({ ...state, moviesResult: action.dataSource });

@@ -82,6 +82,7 @@ const Details = ({ title, genre, plot, director, actors, language, duration, pos
 );
 
 Details.propTypes = {
+  loading: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   plot: PropTypes.string.isRequired,
@@ -90,7 +91,7 @@ Details.propTypes = {
   language: PropTypes.string.isRequired,
   duration: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
+
 };
 
 Details.defaultProps = {

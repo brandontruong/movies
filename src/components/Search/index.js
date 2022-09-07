@@ -146,9 +146,9 @@ const Search = ({ moviesResult, movieSelected, doSearch, loading }) => {
 
 Search.propTypes = {
   moviesResult: PropTypes.shape({
-    totalResults: PropTypes.string.isRequired,
-    Search: PropTypes.arrayOf(movieType).isRequired,
-    Response: PropTypes.string.isRequired,
+    totalResults: PropTypes.string,
+    Search: PropTypes.arrayOf(movieType),
+    Response: PropTypes.string,
     Error: PropTypes.string,
   }).isRequired,
   movieSelected: PropTypes.func.isRequired,
